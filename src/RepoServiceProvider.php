@@ -18,7 +18,7 @@ class RepoServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $commands = ['garethnic\Repo\RepoScaffold'];
+    protected $commands = 'garethnic\Repo\RepoScaffold';
 
     /**
      * Perform post-registration booting of services.
@@ -39,10 +39,11 @@ class RepoServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands($this->commands);
-
-        $this->app->singleton('command.repo.scaffold', function ($app) {
+        $this->app['RepoScaffold'] = $this->app->share(function($app)
+        {
             return new RepoScaffold();
         });
+
+        $this->commands($this->commands);
     }
 }

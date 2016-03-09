@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models\Concrete\Eloquent;
+
+use App\Models\Concrete\AbstractEloquentRepository;
+use App\Models\Contracts\Repositories\{{name}}Repository;
+use App\Models\Objects\{{name}};
+
+class Eloquent{{name}}Repository extends AbstractEloquentRepository implements {{name}}Repository
+{
+    protected $model;
+
+    public function __construct({{name}} $model)
+    {
+        $this->model = $model;
+    }
+}

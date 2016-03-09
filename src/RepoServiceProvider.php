@@ -40,5 +40,9 @@ class RepoServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands($this->commands);
+
+        $this->app->singleton('command.repo.scaffold', function ($app) {
+            return new RepoScaffold();
+        });
     }
 }

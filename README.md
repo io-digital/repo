@@ -1,6 +1,6 @@
 # Repo
 
-
+This package creates scaffolding to implement the Repository pattern.
 
 ## Install
 

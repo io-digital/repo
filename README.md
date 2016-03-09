@@ -49,6 +49,15 @@ This will create the following files:
 - Models/Contracts/Repositories/PostRepository.php
 - Models/Concrete/Eloquent/EloquentPostRepository.php
 
+It will also add the bindings in your `AppServiceProvider.php` file:
+
+``` php
+$this->app->bind(
+    'App\Models\Contracts\Repositories\PostRepository', // Repository (Interface)
+    'App\Models\Concrete\Eloquent\EloquentPostRepository' // Eloquent (Class)
+);
+```
+
 Then in your Controller it's simply:
 
 ``` php

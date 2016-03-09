@@ -39,11 +39,6 @@ class RepoServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['RepoScaffold'] = $this->app->share(function($app)
-        {
-            return new RepoScaffold();
-        });
-
         $this->commands($this->commands);
     }
 }

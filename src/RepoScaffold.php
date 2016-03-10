@@ -4,6 +4,7 @@ namespace garethnic\Repo;
 
 use garethnic\Repo\Helper;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class RepoScaffold extends Command
 {
@@ -14,7 +15,9 @@ class RepoScaffold extends Command
      *
      * @var string
      */
-    protected $signature = 'repo:create {name}';
+    protected $signature = 'repo:create
+    {name : The name of the structure to create}
+    {--m|m : Optionally create a migration file}';
 
     /**
      * The console command description.
@@ -44,6 +47,7 @@ class RepoScaffold extends Command
     public function handle()
     {
         $name = $this->argument('name');
+        $createMigration = $this->option('m');
 
         if (empty($name)) {
             return $this->error("You need to specify an object to create");
@@ -87,6 +91,22 @@ class RepoScaffold extends Command
 
         $this->helper->replaceAndSave(getcwd().'/app/providers/AppServiceProvider.php', $search , $bindImplementation);
 
+        $this->makeMigration($createMigration);
+
         $this->info('Your structure has been created');
+    }
+
+    /**
+     * Create migration file if not null
+     *
+     * @param $option
+     */
+    private function makeMigration($option)
+    {
+        if ($option) {
+            $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
+
+            $this->call('make:migration', ['name' => "create_{$table}_table", '--create' => $table]);
+        }
     }
 }

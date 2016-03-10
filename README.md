@@ -74,6 +74,16 @@ public function __construct(PostRepository $repo)
 }
 ```
 
+### Options
+
+* `-m` or `--m`
+
+Use the the `-m` option to create a migration file for your object:
+
+``` bash
+$ php artisan repo:create Post -m
+```
+
 And off you go!
 
 ## Change log

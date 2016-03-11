@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 - Try/catch blocks
 - Code clean up
+- Missing interface information in README.md
 
 ### Deprecated
 - Nothing

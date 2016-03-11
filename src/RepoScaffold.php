@@ -57,43 +57,13 @@ class RepoScaffold extends Command
         $newContract = ucfirst($name).'Repository.php';
         $newConcrete = 'Eloquent'.ucfirst($name).'Repository.php';
 
-        // Object creation
-        $objectPath = __DIR__.'/object.stub';
-        $objectAppPath = app_path('Models/Objects/'.$newObject);
+        $this->createObjectFiles($name, $newObject, $newContract, $newConcrete);
 
-        $this->helper->replaceAndSave($objectPath, '{{name}}', $name, $objectAppPath);
-
-        // Contract creation
-        $contractPath = __DIR__.'/contract.stub';
-        $contractAppPath = app_path('Models/Contracts/Repositories/'.$newContract);
-
-        $this->helper->replaceAndSave($contractPath, '{{name}}', $name, $contractAppPath);
-
-        // Concrete creation
-        $concretePath = __DIR__.'/concrete.stub';
-        $concreteAppPath = app_path('Models/Concrete/Eloquent/'.$newConcrete);
-
-        $this->helper->replaceAndSave($concretePath, '{{name}}', $name, $concreteAppPath);
-
-        $appBindContract = substr('App\Models\Contracts\Repositories\\'.$newContract, 0, -4);
-        $appBindConcrete = substr('App\Models\Concrete\Eloquent\\'.$newConcrete, 0, -4);
-
-        $bindImplementation = "public function register()
-    {
-        \$this->app->bind(
-             '$appBindContract', // Repository (Interface)
-             '$appBindConcrete' // Eloquent (Class)
-        );
-        ";
-
-        $search = 'public function register()
-    {';
-
-        $this->helper->replaceAndSave(getcwd().'/app/providers/AppServiceProvider.php', $search , $bindImplementation);
+        $this->makeBindings($newContract, $newConcrete);
 
         $this->makeMigration($createMigration);
 
-        $this->info('Your structure has been created');
+        return $this->info('Your structure has been created');
     }
 
     /**
@@ -107,6 +77,75 @@ class RepoScaffold extends Command
             $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
 
             $this->call('make:migration', ['name' => "create_{$table}_table", '--create' => $table]);
+        }
+    }
+
+    /**
+     * Create oject repository files
+     *
+     * @param $name
+     * @param $newObject
+     * @param $newContract
+     * @param $newConcrete
+     */
+    private function createObjectFiles($name, $newObject, $newContract, $newConcrete) {
+        try {
+            // Object creation
+            $objectPath = __DIR__ . '/object.stub';
+            $objectAppPath = app_path('Models/Objects/' . $newObject);
+
+            $this->helper->replaceAndSave($objectPath, '{{name}}', $name, $objectAppPath);
+        } catch (\Throwable $t) {
+            return $this->error($t->getMessage());
+        }
+
+        try {
+            // Contract creation
+            $contractPath = __DIR__ . '/contract.stub';
+            $contractAppPath = app_path('Models/Contracts/Repositories/' . $newContract);
+
+            $this->helper->replaceAndSave($contractPath, '{{name}}', $name, $contractAppPath);
+        } catch (\Throwable $t) {
+            return $this->error($t->getMessage());
+        }
+
+        try {
+            // Concrete creation
+            $concretePath = __DIR__ . '/concrete.stub';
+            $concreteAppPath = app_path('Models/Concrete/Eloquent/' . $newConcrete);
+
+            $this->helper->replaceAndSave($concretePath, '{{name}}', $name, $concreteAppPath);
+        } catch (\Throwable $t) {
+            return $this->error($t->getMessage());
+        }
+    }
+
+    /**
+     * Make the necessary bindings for the repository
+     *
+     * @param $newContract
+     * @param $newConcrete
+     */
+    private function makeBindings($newContract, $newConcrete)
+    {
+        $appBindContract = substr('App\Models\Contracts\Repositories\\' . $newContract, 0, -4);
+        $appBindConcrete = substr('App\Models\Concrete\Eloquent\\' . $newConcrete, 0, -4);
+
+        $bindImplementation = "public function register()
+    {
+        \$this->app->bind(
+             '$appBindContract', // Repository (Interface)
+             '$appBindConcrete' // Eloquent (Class)
+        );
+        ";
+
+        $search = 'public function register()
+    {';
+
+        try {
+            $this->helper->replaceAndSave(getcwd() . '/app/providers/AppServiceProvider.php', $search, $bindImplementation);
+        } catch (\Throwable $t) {
+            $this->error($t->getMessage());
         }
     }
 }

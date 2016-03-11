@@ -84,7 +84,21 @@ Use the the `-m` option to create a migration file for your object:
 $ php artisan repo:create Post -m
 ```
 
-And off you go!
+The repository interface provides the following methods:
+
+``` php
+public function all($with = [], $orderBy = []);
+
+public function find($id, $relations = array());
+
+public function create($attributes = array());
+
+public function edit($id, $attributes = array());
+
+public function delete($id);
+```
+
+The implementations can found in `Models/Concrete/AbstractEloquentRepository.php`
 
 ## Change log
 

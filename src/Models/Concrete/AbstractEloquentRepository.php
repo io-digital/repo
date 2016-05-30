@@ -30,6 +30,57 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
             ->first();
     }
 
+    /**
+     * $this->model->findBy('title', $title);
+     *
+     */
+    public function findBy($attribute, $value, $columns = array('*'))
+    {
+        return $this->model->where($attribute, '=', $value)->first($columns);
+    }
+
+    /**
+     * $this->model->findAllBy('author_id', $author_id);
+     *
+     */
+    public function findAllBy($attribute, $value, $columns = array('*'))
+    {
+        return $this->model->where($attribute, '=', $value)->get($columns);
+    }
+
+    /**
+     * $this->film->findWhere(['author_id' => $author_id,['year','>',$year]]);
+     *
+     */
+    public function findWhere($where, $columns = ['*'], $or = false)
+    {
+        $model = $this->model;
+        foreach ($where as $field => $value) {
+            if ($value instanceof \Closure) {
+                $model = (!$or)
+                    ? $model->where($value)
+                    : $model->orWhere($value);
+            } elseif (is_array($value)) {
+                if (count($value) === 3) {
+                    list($field, $operator, $search) = $value;
+                    $model = (!$or)
+                        ? $model->where($field, $operator, $search)
+                        : $model->orWhere($field, $operator, $search);
+                } elseif (count($value) === 2) {
+                    list($field, $search) = $value;
+                    $model = (!$or)
+                        ? $model->where($field, '=', $search)
+                        : $model->orWhere($field, '=', $search);
+                }
+            } else {
+                $model = (!$or)
+                    ? $model->where($field, '=', $value)
+                    : $model->orWhere($field, '=', $value);
+            }
+        }
+        return $model->get($columns);
+    }
+
     public function all($with = [], $orderBy = [])
     {
         $model = $this->make($with, $orderBy);

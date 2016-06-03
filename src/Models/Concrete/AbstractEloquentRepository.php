@@ -81,6 +81,16 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $model->get($columns);
     }
 
+    public function paginate($perPage = 25, $columns = array('*'))
+    {
+        return $this->model->paginate($perPage, $columns);
+    }
+
+    public function simplePaginate($limit = null, $columns = ['*'])
+    {
+            return $this->model->simplePaginate($limit, $columns);
+    }
+
     public function all($with = [], $orderBy = [])
     {
         $model = $this->make($with, $orderBy);

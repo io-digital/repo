@@ -18,6 +18,10 @@ interface RepositoryInterface {
 
     public function findWhere($where, $columns = ['*'], $or = false);
 
+    public function paginate($perPage = 25, $columns = array('*'));
+
+	public function simplePaginate($limit = null, $columns = ['*']);
+
     public function create($attributes = array());
 
     public function edit($id, $attributes = array());

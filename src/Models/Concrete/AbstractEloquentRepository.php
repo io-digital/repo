@@ -49,7 +49,10 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
     }
 
     /**
-     * $this->film->findWhere(['author_id' => $author_id,['year','>',$year]]);
+     * $this->model->findWhere(
+     *      ['name' => $name,
+     *      ['year','>',$year]
+     * ]);
      *
      */
     public function findWhere($where, $columns = ['*'], $or = false)
@@ -86,9 +89,9 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $this->model->paginate($perPage, $columns);
     }
 
-    public function simplePaginate($limit = null, $columns = ['*'])
+    public function simplePaginate($perPage = 25, $columns = ['*'])
     {
-            return $this->model->simplePaginate($limit, $columns);
+            return $this->model->simplePaginate($perPage, $columns);
     }
 
     public function all($with = [], $orderBy = [])

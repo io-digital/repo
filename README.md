@@ -106,6 +106,22 @@ public function delete($id);
 
 The implementations can found in `Models/Concrete/AbstractEloquentRepository.php`
 
+Example usage for the find functions:
+
+```php
+//returns with ->first()
+$data = $this->model->findBy('title', $title);
+
+//returns with ->get()
+$data = $this->model->findAllBy('category', $category);
+
+//returns with ->get()
+$data = $this->model->findWhere([
+            'category' => $category,
+           ['year','>', $year]
+     ]);
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

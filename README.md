@@ -87,6 +87,16 @@ public function all($with = [], $orderBy = []);
 
 public function find($id, $relations = array());
 
+public function findBy($attribute, $value, $columns = array('*'));
+
+public function findAllBy($attribute, $value, $columns = array('*'));
+
+public function findWhere($where, $columns = ['*'], $or = false);
+
+public function paginate($perPage = 25, $columns = array('*'));
+
+public function simplePaginate($limit = null, $columns = ['*']);
+
 public function create($attributes = array());
 
 public function edit($id, $attributes = array());

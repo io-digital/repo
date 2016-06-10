@@ -6,7 +6,7 @@ This package creates scaffolding to implement the Repository pattern.
 
 `composer require io-digital/repo`
 
-Add the garethnic\ServiceProvider to your config/app.php providers array:
+Add the ServiceProvider to your config/app.php providers array:
 
 ``` php
 IoDigital\Repo\RepoServiceProvider::class,
@@ -127,7 +127,3 @@ Clean up code
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-[link-packagist]: https://packagist.org/packages/garethnic/repo
-[link-downloads]: https://packagist.org/packages/garethnic/repo
-[link-author]: https://github.com/garethnic

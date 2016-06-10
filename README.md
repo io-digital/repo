@@ -4,22 +4,18 @@ This package creates scaffolding to implement the Repository pattern.
 
 ## Install
 
-Add the following to your `composer.json` file:
-
-```
-"garethnic/repo": "dev-master"
-```
+`composer require io-digital/repo`
 
 Add the garethnic\ServiceProvider to your config/app.php providers array:
 
 ``` php
-garethnic\Repo\RepoServiceProvider::class,
+IoDigital\Repo\RepoServiceProvider::class,
 ```
 
 Then run the following artisan command:
 
 ``` bash
-$ php artisan vendor:publish
+$ php artisan vendor:publish --provider="IoDigital\Repo\RepoServiceProvider"
 ```
 
 This will create the following folder structure in your `app/` folder:

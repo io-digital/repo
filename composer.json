@@ -1,5 +1,5 @@
 {
-    "name": "garethnic/repo",
+    "name": "io-digital/repo",
     "type": "library",
     "description": "Scaffold repository pattern in Laravel",
     "keywords": [
@@ -8,12 +8,12 @@
         "repository",
         "pattern"
     ],
-    "homepage": "https://github.com/garethnic/repo",
+    "homepage": "https://github.com/io-digital/repo",
     "license": "MIT",
     "authors": [
         {
             "name": "Gareth Nicholson",
-            "email": "gareth.nic@gmail.com",
+            "email": "gareth.nic@io.co.za",
             "role": "Developer"
         }
     ],
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "garethnic\\Repo\\": "src"
+            "IoDigital\\Repo\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "garethnic\\Repo\\": "tests"
+            "IoDigital\\Repo\\": "tests"
         }
     },
     "scripts": {

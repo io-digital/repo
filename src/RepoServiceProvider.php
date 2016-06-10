@@ -1,6 +1,6 @@
 <?php
 
-namespace garethnic\Repo;
+namespace IoDigital\Repo;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,7 +18,7 @@ class RepoServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $commands = 'garethnic\Repo\RepoScaffold';
+    protected $commands = 'IoDigital\Repo\RepoScaffold';
 
     /**
      * Perform post-registration booting of services.

@@ -1,10 +1,9 @@
 <?php
 
-namespace garethnic\Repo;
+namespace IoDigital\Repo;
 
-use garethnic\Repo\Helper;
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Illuminate\Console\Command;
 
 class RepoScaffold extends Command
 {
@@ -95,8 +94,8 @@ class RepoScaffold extends Command
             $objectAppPath = app_path('Models/Objects/' . $newObject);
 
             $this->helper->replaceAndSave($objectPath, '{{name}}', $name, $objectAppPath);
-        } catch (\Throwable $t) {
-            return $this->error($t->getMessage());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
 
         try {
@@ -105,8 +104,8 @@ class RepoScaffold extends Command
             $contractAppPath = app_path('Models/Contracts/Repositories/' . $newContract);
 
             $this->helper->replaceAndSave($contractPath, '{{name}}', $name, $contractAppPath);
-        } catch (\Throwable $t) {
-            return $this->error($t->getMessage());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
 
         try {
@@ -115,8 +114,8 @@ class RepoScaffold extends Command
             $concreteAppPath = app_path('Models/Concrete/Eloquent/' . $newConcrete);
 
             $this->helper->replaceAndSave($concretePath, '{{name}}', $name, $concreteAppPath);
-        } catch (\Throwable $t) {
-            return $this->error($t->getMessage());
+        } catch (\Exception $e) {
+            return $this->error($e->getMessage());
         }
     }
 
@@ -144,8 +143,8 @@ class RepoScaffold extends Command
 
         try {
             $this->helper->replaceAndSave(getcwd() . '/app/providers/AppServiceProvider.php', $search, $bindImplementation);
-        } catch (\Throwable $t) {
-            $this->error($t->getMessage());
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
         }
     }
 }

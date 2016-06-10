@@ -1,6 +1,6 @@
 <?php
 
-namespace garethnic\Repo;
+namespace IoDigital\Repo;
 
 use Illuminate\Filesystem\Filesystem as File;
 

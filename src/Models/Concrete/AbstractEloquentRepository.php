@@ -26,7 +26,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
     public function find($id, $relations = array()){
 
         return $this->make($relations)
-            ->where($this->model->getTable().'.id', $id)
+            ->where('id', $id)
             ->first();
     }
 

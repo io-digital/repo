@@ -4,7 +4,7 @@ namespace App\Models\Contracts\Repositories;
 
 use App\Models\Contracts\RepositoryInterface;
 
-interface {{name}} extends RepositoryInterface
+interface {{name}}Repository extends RepositoryInterface
 {
 
 }

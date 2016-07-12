@@ -118,7 +118,9 @@ $data = $this->model->findAllBy('category', $category);
 //returns with ->get()
 $data = $this->model->findWhere([
             'category' => $category,
-           ['year', '>' , $year]
+           ['year', '>' , $year],
+           ['name', 'like', "%name%"],
+           ['surname', 'like', '%nes']
      ]);
 ```
 

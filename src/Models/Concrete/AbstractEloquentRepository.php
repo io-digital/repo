@@ -34,7 +34,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
      * $this->model->findBy('title', $title);
      *
      */
-    public function findBy($attribute, $value, $columns = array('*'))
+    public function findBy($attribute, $value, $columns = ['*'])
     {
         return $this->model->where($attribute, '=', $value)->first($columns);
     }
@@ -43,7 +43,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
      * $this->model->findAllBy('author_id', $author_id);
      *
      */
-    public function findAllBy($attribute, $value, $columns = array('*'))
+    public function findAllBy($attribute, $value, $columns = ['*'])
     {
         return $this->model->where($attribute, '=', $value)->get($columns);
     }
@@ -84,7 +84,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $model->get($columns);
     }
 
-    public function paginate($perPage = 25, $columns = array('*'))
+    public function paginate($perPage = 25, $columns = ['*'])
     {
         return $this->model->paginate($perPage, $columns);
     }

@@ -94,10 +94,10 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
             return $this->model->simplePaginate($perPage, $columns);
     }
 
-    public function all($with = [], $orderBy = [])
+    public function all($with = [], $orderBy = [], $columns = ['*'])
     {
         $model = $this->make($with, $orderBy);
-        return $model->get();
+        return $model->get($columns);
     }
 
     public function create($attributes = array()){

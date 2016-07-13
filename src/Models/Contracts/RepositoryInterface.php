@@ -8,23 +8,23 @@ namespace App\Models\Contracts;
  */
 interface RepositoryInterface {
 
-    public function all($with = [], $orderBy = []);
+    public function all($with = [], $orderBy = [], $columns = ['*']);
 
     public function find($id, $relations = array());
 
-    public function findBy($attribute, $value, $columns = array('*'));
+    public function findBy($attribute, $value, $columns = ['*']);
 
-    public function findAllBy($attribute, $value, $columns = array('*'));
+    public function findAllBy($attribute, $value, $columns = ['*']);
 
     public function findWhere($where, $columns = ['*'], $or = false);
 
-    public function paginate($perPage = 25, $columns = array('*'));
+    public function paginate($perPage = 25, $columns = ['*']);
 
 	public function simplePaginate($limit = null, $columns = ['*']);
 
-    public function create($attributes = array());
+    public function create($attributes = []);
 
-    public function edit($id, $attributes = array());
+    public function edit($id, $attributes = []);
 
     public function delete($id);
 }

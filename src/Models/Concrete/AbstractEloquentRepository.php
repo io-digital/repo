@@ -8,14 +8,14 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
 {
     //public $relationTree = array();
 
-    public function make(array $with = array(), array $orderBy = array())
+    public function make(array $with = array(), array $orderBy = [])
     {
-        if(!empty($with)){
+        if (!empty($with)) {
             $this->model = $this->model->with($with);
         }
 
-        if(!empty($orderBy)){
-            foreach($orderBy as $col => $dir){
+        if (!empty($orderBy)) {
+            foreach ($orderBy as $col => $dir) {
                 $this->model = $this->model->orderBy($col, $dir);
             }
         }
@@ -23,8 +23,8 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $this->model;
     }
 
-    public function find($id, $relations = array()){
-
+    public function find($id, $relations = [])
+    {
         return $this->make($relations)
             ->where('id', $id)
             ->first();
@@ -91,7 +91,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
 
     public function simplePaginate($perPage = 25, $columns = ['*'])
     {
-            return $this->model->simplePaginate($perPage, $columns);
+        return $this->model->simplePaginate($perPage, $columns);
     }
 
     public function all($with = [], $orderBy = [], $columns = ['*'])
@@ -100,15 +100,16 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $model->get($columns);
     }
 
-    public function create($attributes = array()){
+    public function create($attributes = array())
+    {
         return $this->model->create($attributes);
     }
 
-    public function edit($id, $attributes = array()){
-
+    public function edit($id, $attributes = array())
+    {
         $obj = $this->model->find($id);
 
-        if(!$obj){
+        if (!$obj) {
             return false;
         }
 
@@ -121,7 +122,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
     {
         $obj = $this->model->find($id);
 
-        if(!$obj){
+        if (!$obj) {
             return false;
         }
 

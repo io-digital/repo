@@ -83,13 +83,13 @@ $ php artisan repo:create Post -m
 The repository interface provides the following methods:
 
 ``` php
-public function all($with = [], $orderBy = []);
+public function all($with = [], $orderBy = [], $columns = ['*']);
 
 public function find($id, $relations = []);
 
 public function findBy($attribute, $value, $columns = ['*']);
 
-public function findAllBy($attribute, $value, $columns = array('*'));
+public function findAllBy($attribute, $value, $columns = ['*']);
 
 public function findWhere($where, $columns = ['*'], $or = false);
 

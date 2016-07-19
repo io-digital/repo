@@ -84,6 +84,11 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
         return $model->get($columns);
     }
 
+    public function findWhereIn($field, array $values, $columns = ['*'])
+    {
+        return $this->model->whereIn($field, $values)->get($columns);
+    }
+
     public function paginate($perPage = 25, $columns = ['*'])
     {
         return $this->model->paginate($perPage, $columns);

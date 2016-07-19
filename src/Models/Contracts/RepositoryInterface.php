@@ -10,13 +10,15 @@ interface RepositoryInterface {
 
     public function all($with = [], $orderBy = [], $columns = ['*']);
 
-    public function find($id, $relations = array());
+    public function find($id, $relations = []);
 
     public function findBy($attribute, $value, $columns = ['*']);
 
     public function findAllBy($attribute, $value, $columns = ['*']);
 
     public function findWhere($where, $columns = ['*'], $or = false);
+
+    public function findWhereIn($field, array $values, $columns = ['*']);
 
     public function paginate($perPage = 25, $columns = ['*']);
 

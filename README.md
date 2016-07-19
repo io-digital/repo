@@ -93,6 +93,8 @@ public function findAllBy($attribute, $value, $columns = ['*']);
 
 public function findWhere($where, $columns = ['*'], $or = false);
 
+public function findWhereIn($field, array $values, $columns = ['*']);
+
 public function paginate($perPage = 25, $columns = ['*']);
 
 public function simplePaginate($limit = null, $columns = ['*']);
@@ -122,6 +124,9 @@ $data = $this->model->findWhere([
            ['name', 'like', "%$name%"],
            ['surname', 'like', '%nes']
      ]);
+     
+ $data = $this->model->findWhereIn('id', [1, 2, 3])
+                     ->get(['name', 'email']);
 ```
 
 ## Change log

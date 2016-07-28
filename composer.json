@@ -1,7 +1,7 @@
 {
     "name": "io-digital/repo",
     "type": "library",
-    "description": "Scaffold repository pattern in Laravel",
+    "description": "Easily generate the Repository Pattern in Laravel",
     "keywords": [
         "repo",
         "laravel",

@@ -6,7 +6,7 @@ use App\Models\Contracts\RepositoryInterface;
 
 abstract class AbstractEloquentRepository implements RepositoryInterface
 {
-    public function getModelName()
+    public function modelName()
     {
         return get_class($this->model);
     }

@@ -6,9 +6,12 @@ use App\Models\Contracts\RepositoryInterface;
 
 abstract class AbstractEloquentRepository implements RepositoryInterface
 {
-    //public $relationTree = array();
+    public function getModelName()
+    {
+        return get_class($this->model);
+    }
 
-    public function make(array $with = array(), array $orderBy = [])
+    public function make(array $with = [], array $orderBy = [])
     {
         if (!empty($with)) {
             $this->model = $this->model->with($with);

@@ -8,6 +8,8 @@ namespace App\Models\Contracts;
  */
 interface RepositoryInterface {
 
+    public function modelName();
+
     public function all($with = [], $orderBy = [], $columns = ['*']);
 
     public function find($id, $relations = []);

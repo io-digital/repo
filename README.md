@@ -23,11 +23,13 @@ This will create the following folder structure in your `app/` folder:
 - Models
     - Concrete
         - Eloquent
-        - AbstractEloquentRepository.php
+        - _AbstractEloquentRepository.php
     - Contracts
         - Repositories
-        - RepositoryInterface.php
+        - _RepositoryInterface.php
     - Objects
+
+Note that _AbstractEloquentRepository.php and _RepositoryInterface.php are named as such to avoid existing files being overwritten. In the case of a new installation, these files can simply be renamed to AbstractEloquentRepository.php and RepositoryInterface.php, respectively. If these files already exist, on the other hand, please take care to manually merge the newly published files with the existing ones.
 
 ## Usage
 

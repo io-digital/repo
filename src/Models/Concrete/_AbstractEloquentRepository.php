@@ -28,9 +28,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
 
     public function find($id, $relations = [])
     {
-        return $this->make($relations)
-            ->where('id', $id)
-            ->first();
+        return $this->make($relations)->find($id);
     }
 
     /**
@@ -121,7 +119,7 @@ abstract class AbstractEloquentRepository implements RepositoryInterface
             return false;
         }
 
-        $obj->edit($attributes);
+        $obj->fill($attributes)->push();
 
         return $obj;
     }

@@ -24,7 +24,7 @@ interface RepositoryInterface {
 
     public function paginate($perPage = 25, $columns = ['*']);
 
-	public function simplePaginate($limit = null, $columns = ['*']);
+    public function simplePaginate($limit = null, $columns = ['*']);
 
     public function create($attributes = []);
 

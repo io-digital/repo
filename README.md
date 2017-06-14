@@ -75,11 +75,24 @@ public function __construct(PostRepository $repo)
 ### Options
 
 * `-m` or `--m`
+* `-c` or `--c`
 
-Use the the `-m` option to create a migration file for your object:
+Use the `-m` option to create a migration file for your object:
 
 ``` bash
 $ php artisan repo:create Post -m
+```
+
+Use the `-c` option to create a resource controller for your object:
+
+``` bash
+$ php artisan repo:create Post -c
+```
+
+All together now:
+
+``` bash
+$ php artisan repo:create Post -m -c
 ```
 
 The repository interface provides the following methods:

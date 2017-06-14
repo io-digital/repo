@@ -16,14 +16,15 @@ class RepoScaffold extends Command
      */
     protected $signature = 'repo:create
     {name : The name of the structure to create}
-    {--m|m : Optionally create a migration file}';
+    {--m|m : Optionally create a migration file}
+    {--c|c : Optionally create a resource controller file}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create an object to scaffold';
+    protected $description = 'Create a model to scaffold';
 
     /**
      * Create a new command instance.
@@ -47,6 +48,7 @@ class RepoScaffold extends Command
     {
         $name = $this->argument('name');
         $createMigration = $this->option('m');
+        $createResourceController = $this->option('c');
 
         if (empty($name)) {
             return $this->error("You need to specify an object to create");
@@ -62,6 +64,8 @@ class RepoScaffold extends Command
 
         $this->makeMigration($createMigration);
 
+        $this->makeResourceController($name, $createResourceController);
+
         return $this->info('Your structure has been created');
     }
 
@@ -76,6 +80,28 @@ class RepoScaffold extends Command
             $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
 
             $this->call('make:migration', ['name' => "create_{$table}_table", '--create' => $table]);
+        }
+    }
+
+    /**
+     * Create resource controller if not null
+     *
+     * @param $option
+     */
+    private function makeResourceController($name, $option = null)
+    {
+        if ($option !== null) {
+            $controllerName = Str::studly(class_basename($this->argument('name')));
+            $controllerNameFile = $controllerName . 'Controller.php';
+
+            try {
+                $controllerPath = __DIR__ . '/controller.stub';
+                $controllerAppPath = app_path('Http/Controllers/' . $controllerNameFile);
+
+                $this->helper->replaceAndSave($controllerPath, '{{name}}', $controllerName, $controllerAppPath);
+            } catch (\Exception $e) {
+                return $this->error($e->getMessage());
+            }
         }
     }
 

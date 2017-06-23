@@ -4,6 +4,8 @@ This package creates scaffolding to implement the Repository pattern.
 
 ## Install
 
+*Repo supports package auto discovery for Laravel*
+
 `composer require io-digital/repo`
 
 Add the ServiceProvider to your config/app.php providers array:

@@ -64,7 +64,7 @@ class RepoScaffold extends Command
 
         $this->makeMigration($createMigration);
 
-        $this->makeResourceController($name, $createResourceController);
+        $this->makeResourceController($createResourceController);
 
         return $this->info('Your structure has been created');
     }
@@ -88,9 +88,9 @@ class RepoScaffold extends Command
      *
      * @param $option
      */
-    private function makeResourceController($name, $option = null)
+    private function makeResourceController($option)
     {
-        if ($option !== null) {
+        if ($option) {
             $controllerName = Str::studly(class_basename($this->argument('name')));
             $controllerNameFile = $controllerName . 'Controller.php';
 

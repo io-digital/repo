@@ -100,6 +100,8 @@ $ php artisan repo:create Post -m -c
 The repository interface provides the following methods:
 
 ``` php
+public function make($with = [], $orderBy = []);
+
 public function all($with = [], $orderBy = [], $columns = ['*']);
 
 public function find($id, $relations = []);
@@ -128,6 +130,9 @@ The implementations can found in `Models/Concrete/AbstractEloquentRepository.php
 Example usage for the find functions:
 
 ```php
+//returns the model with the relationship as a paginated collection
+$data = $this->model->make(['relation'])->paginate();
+
 //returns with ->first()
 $data = $this->model->findBy('title', $title);
 
